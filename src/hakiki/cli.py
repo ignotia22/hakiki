@@ -128,7 +128,7 @@ def cmd_checkpoint(args) -> int:
     head = result.entries[-1]
     cp = make_checkpoint(head["log_id"], head["seq"], head["hash"], key)
     append_checkpoint(cp, args.out)
-    print(f"Checkpoint written to {args.out}: {cp['count']} entries, head {cp['head_hash'][:16]}…")
+    print(f"Checkpoint written to {args.out}: {cp['count']} entries, head {cp['head_hash'][:16]}...")
     print("Store this file where the agent's operator cannot edit it.", file=sys.stderr)
     return 0
 
