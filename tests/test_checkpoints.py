@@ -12,7 +12,7 @@ def test_truncation_without_checkpoint_is_missed(make_log, keys, log_path):
     write_lines(log_path, read_lines(log_path)[:-2])
     result = verify(log_path, keys[1])
     assert result.status == INTACT  # undetectable without a checkpoint
-    assert "cannot be detected" in result.explanation
+    assert "would not be detected" in result.explanation
 
 
 def test_truncation_with_checkpoint_is_caught(make_log, keys, log_path, tmp_path):

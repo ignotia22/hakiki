@@ -16,12 +16,12 @@ INTACT, TAMPERED, INCOMPLETE = "INTACT", "TAMPERED", "INCOMPLETE"
 EXIT_CODES = {INTACT: 0, TAMPERED: 1, INCOMPLETE: 2}
 
 EXPLANATIONS = {
-    INTACT: "Every entry is signed by the expected key and chained in order; nothing was edited, "
-    "inserted or reordered{ckpt}.",
-    TAMPERED: "The log has been changed after it was written: at least one entry was edited, "
-    "inserted, removed, reordered or signed with a different key.",
-    INCOMPLETE: "The entries that remain are genuine, but the log is shorter than, or differs from, "
-    "what an earlier checkpoint recorded, so entries are missing.",
+    INTACT: "Every entry is genuine and in its original order: nothing was edited, added, "
+    "removed or reordered after it was written{ckpt}.",
+    TAMPERED: "This log was changed after it was written: at least one entry was edited, added, "
+    "removed, reordered or signed with the wrong key, so it cannot be relied on.",
+    INCOMPLETE: "The entries that remain are genuine, but some are missing: the log is shorter "
+    "than, or differs from, what an earlier checkpoint recorded.",
 }
 
 
@@ -47,10 +47,12 @@ class VerifyResult:
             return "The log contains no entries, so there is nothing to vouch for."
         ckpt = ""
         if self.status == INTACT:
+            n = self.checkpoints_checked
             ckpt = (
-                f", and it matches {self.checkpoints_checked} checkpoint(s)"
-                if self.checkpoints_checked
-                else ". Without checkpoints, entries deleted from the end cannot be detected"
+                f", and it matches {n} checkpoint{'s' if n != 1 else ''}"
+                if n
+                else ". No checkpoints were checked, so entries deleted from the end "
+                "would not be detected"
             )
         return EXPLANATIONS[self.status].format(ckpt=ckpt)
 
