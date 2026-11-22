@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hakiki"
+version = "0.1.0"
+description = "The tech log for AI agents: a signed, tamper-evident record of what an agent did and who approved it."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "David Gitau" }]
+requires-python = ">=3.10"
+dependencies = ["cryptography>=41"]
+keywords = ["ai", "agents", "audit", "log", "ed25519", "tamper-evident"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Topic :: Security :: Cryptography",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+hakiki = "hakiki.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
