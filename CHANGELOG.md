@@ -30,6 +30,7 @@ First public release.
   0 intact, 1 tampered, 2 incomplete, 3 usage error.
 - `hakiki.integrations` helpers for OpenAI (Chat Completions and Responses)
   and Anthropic tool-use responses, with no SDK dependency.
+- Type hints, with a `py.typed` marker.
 - Examples: `quickstart.py`, `approvals.py`, `tamper_demo.py`.
 - CI on Python 3.10 to 3.13 on Ubuntu, macOS and Windows.
 

@@ -86,3 +86,44 @@ def test_anthropic_dicts_and_tool_error(keys, log_path):
     out = run_anthropic_tool_uses(ledger, response, {"flaky": flaky})
     assert out[0]["is_error"] is True and "TimeoutError" in out[0]["content"]
     assert types(log_path, keys) == [("tool_call", "flaky"), ("tool_error", "flaky")]
+
+
+# The JSON body an OpenAI-compatible chat-completions endpoint returns,
+# exactly as it arrives over HTTP: arguments are a JSON string, content may
+# be empty, and several tool calls can come back at once.
+OPENAI_COMPATIBLE_BODY = """
+{
+  "id": "chatcmpl-123",
+  "object": "chat.completion",
+  "created": 1764000000,
+  "model": "local-model",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {"id": "call_a", "index": 0, "type": "function",
+           "function": {"name": "get_weather", "arguments": "{\\"city\\": \\"Mombasa\\"}"}},
+          {"id": "call_b", "index": 1, "type": "function",
+           "function": {"name": "get_weather", "arguments": "{\\"city\\": \\"Kisumu\\"}"}}
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {"prompt_tokens": 80, "completion_tokens": 30, "total_tokens": 110}
+}
+"""
+
+
+def test_openai_compatible_chat_completions_json(keys, log_path):
+    ledger = Ledger(log_path, keys[0], model="local-model")
+    response = json.loads(OPENAI_COMPATIBLE_BODY)
+    out = run_openai_tool_calls(ledger, response, {"get_weather": get_weather})
+    assert out == [
+        {"role": "tool", "tool_call_id": "call_a", "content": json.dumps({"city": "Mombasa", "temp_c": 21})},
+        {"role": "tool", "tool_call_id": "call_b", "content": json.dumps({"city": "Kisumu", "temp_c": 21})},
+    ]
+    assert types(log_path, keys) == [("tool_call", "get_weather"), ("tool_result", "get_weather")] * 2
