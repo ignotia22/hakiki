@@ -1,4 +1,10 @@
-<h1 align="center">Hakiki</h1>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/hakiki-banner-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/hakiki-banner-light.svg">
+    <img alt="Hakiki: the tech log for AI agents" src="docs/assets/hakiki-banner-light.svg" width="100%">
+  </picture>
+</p>
 
 <p align="center">
   <a href="https://github.com/ignotia22/hakiki/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/ignotia22/hakiki/actions/workflows/ci.yml/badge.svg?branch=main"></a>
