@@ -1,17 +1,17 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/hakiki-banner-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="docs/assets/hakiki-banner-light.svg">
-    <img alt="Hakiki: the tech log for AI agents" src="docs/assets/hakiki-banner-light.svg" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ignotia22/hakiki/main/docs/assets/hakiki-banner-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ignotia22/hakiki/main/docs/assets/hakiki-banner-light.svg">
+    <img alt="Hakiki: the tech log for AI agents" src="https://raw.githubusercontent.com/ignotia22/hakiki/main/docs/assets/hakiki-banner-light.svg" width="100%">
   </picture>
 </p>
 
 <p align="center">
   <a href="https://github.com/ignotia22/hakiki/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/ignotia22/hakiki/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-  <a href="pyproject.toml"><img alt="Python 3.10 to 3.13" src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-3776ab"></a>
-  <a href="LICENSE"><img alt="Licence: Apache 2.0" src="https://img.shields.io/badge/licence-Apache%202.0-blue"></a>
-  <a href="pyproject.toml"><img alt="Dependencies: 1" src="https://img.shields.io/badge/dependencies-1-brightgreen"></a>
-  <a href=".github/workflows/ci.yml"><img alt="Platforms: Linux, macOS, Windows" src="https://img.shields.io/badge/platforms-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey"></a>
+  <a href="https://github.com/ignotia22/hakiki/blob/main/pyproject.toml"><img alt="Python 3.10 to 3.13" src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-3776ab"></a>
+  <a href="https://github.com/ignotia22/hakiki/blob/main/LICENSE"><img alt="Licence: Apache 2.0" src="https://img.shields.io/badge/licence-Apache%202.0-blue"></a>
+  <a href="https://github.com/ignotia22/hakiki/blob/main/pyproject.toml"><img alt="Dependencies: 1" src="https://img.shields.io/badge/dependencies-1-brightgreen"></a>
+  <a href="https://github.com/ignotia22/hakiki/blob/main/.github/workflows/ci.yml"><img alt="Platforms: Linux, macOS, Windows" src="https://img.shields.io/badge/platforms-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey"></a>
 </p>
 
 <h3 align="center">Prove what your AI agent did, and who approved it.</h3>
@@ -68,7 +68,7 @@ Case 3 is a miss. Deleting entries from the end leaves a valid chain, so a hash 
 ## Quickstart
 
 ```bash
-pip install git+https://github.com/ignotia22/hakiki
+pip install hakiki
 hakiki keygen                      # writes hakiki.key (private) and hakiki.pub (public)
 ```
 
@@ -96,7 +96,7 @@ hakiki verify run.jsonl --pubkey hakiki.pub --checkpoints checkpoints.jsonl
 hakiki report run.jsonl --pubkey hakiki.pub --checkpoints checkpoints.jsonl --format html --out report.html
 ```
 
-`verify` exits with `0` for intact, `1` for tampered, `2` for incomplete and `3` for a usage error, so it slots into scripts and CI. The [`examples/`](examples) folder has runnable versions of everything in this README.
+`verify` exits with `0` for intact, `1` for tampered, `2` for incomplete and `3` for a usage error, so it slots into scripts and CI. The [`examples/`](https://github.com/ignotia22/hakiki/tree/main/examples) folder has runnable versions of everything in this README.
 
 ## Works with any model
 
@@ -122,7 +122,7 @@ tool_results = run_anthropic_tool_uses(ledger, response, {"lookup_order": lookup
 
 `run_openai_tool_calls` handles OpenAI Chat Completions and Responses API responses. `run_anthropic_tool_uses` handles Anthropic Messages responses. Both accept SDK objects or plain dicts, and neither SDK is a dependency. Tool errors and rejected approvals are recorded and returned to the model as error results, so the agent loop keeps going.
 
-`run_openai_tool_calls` also accepts the raw JSON body of a chat-completions response. That is the format servers with an OpenAI-compatible API return, Ollama and vLLM among them. [`test_openai_compatible_chat_completions_json`](tests/test_integrations.py) checks a body in that format. The integration tests use fake responses and make no network calls. They check the format and do not run against any provider's service.
+`run_openai_tool_calls` also accepts the raw JSON body of a chat-completions response. That is the format servers with an OpenAI-compatible API return, Ollama and vLLM among them. [`test_openai_compatible_chat_completions_json`](https://github.com/ignotia22/hakiki/blob/main/tests/test_integrations.py) checks a body in that format. The integration tests use fake responses and make no network calls. They check the format and do not run against any provider's service.
 
 ## Approvals
 
@@ -188,11 +188,11 @@ hakiki report run.jsonl --pubkey hakiki.pub --checkpoints checkpoints.jsonl --fo
 hakiki report run.jsonl --pubkey hakiki.pub --format md --out report.md
 ```
 
-The HTML report is one file with no JavaScript, and it prints cleanly. This is the top of a real report, from running [`examples/approvals.py`](examples/approvals.py) and taking one checkpoint:
+The HTML report is one file with no JavaScript, and it prints cleanly. This is the top of a real report, from running [`examples/approvals.py`](https://github.com/ignotia22/hakiki/blob/main/examples/approvals.py) and taking one checkpoint:
 
-<p align="center"><img src="docs/assets/report-preview.png" alt="Hakiki report: an INTACT verdict, an overview table, tool counts and an approvals table" width="720"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/ignotia22/hakiki/main/docs/assets/report-preview.png" alt="Hakiki report: an INTACT verdict, an overview table, tool counts and an approvals table" width="720"></p>
 
-The full report, including the timeline and the section on what it does and does not prove, is in [`examples/sample-report.html`](examples/sample-report.html). Download it and open it in a browser.
+The full report, including the timeline and the section on what it does and does not prove, is in [`examples/sample-report.html`](https://github.com/ignotia22/hakiki/blob/main/examples/sample-report.html). Download it and open it in a browser.
 
 ## How it works
 
@@ -210,7 +210,7 @@ Each event is one line of JSON. This is the entry behind the privacy example abo
 - **Verdict.** TAMPERED if any entry or checkpoint fails. Otherwise INCOMPLETE if the log is empty, or is shorter than or differs from a checkpoint. Otherwise INTACT.
 - **Writes.** Appends happen under a lock and are flushed and synced to disk before the call returns. Reopening a log continues its chain.
 
-The core lives in [`ledger.py`](src/hakiki/ledger.py), [`verify.py`](src/hakiki/verify.py), [`checkpoint.py`](src/hakiki/checkpoint.py) and [`entry.py`](src/hakiki/entry.py).
+The core lives in [`ledger.py`](https://github.com/ignotia22/hakiki/blob/main/src/hakiki/ledger.py), [`verify.py`](https://github.com/ignotia22/hakiki/blob/main/src/hakiki/verify.py), [`checkpoint.py`](https://github.com/ignotia22/hakiki/blob/main/src/hakiki/checkpoint.py) and [`entry.py`](https://github.com/ignotia22/hakiki/blob/main/src/hakiki/entry.py).
 
 ## Limitations
 
@@ -240,15 +240,15 @@ Hakiki is a tamper-evident record and nothing more. If you need to replay agent 
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how to run the tests and what changes fit.
+See [CONTRIBUTING.md](https://github.com/ignotia22/hakiki/blob/main/CONTRIBUTING.md) for how to run the tests and what changes fit.
 
 ## Security
 
-Report vulnerabilities privately, as described in [SECURITY.md](SECURITY.md).
+Report vulnerabilities privately, as described in [SECURITY.md](https://github.com/ignotia22/hakiki/blob/main/SECURITY.md).
 
 ## Licence
 
-[Apache License 2.0](LICENSE).
+[Apache License 2.0](https://github.com/ignotia22/hakiki/blob/main/LICENSE).
 
 ---
 
